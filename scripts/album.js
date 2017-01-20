@@ -18,7 +18,7 @@ var albumPicasso = {
      artist: 'Guglielmo Marconi',
      label: 'EM',
      year: '1909',
-     albumArtUrl: 'assets/images/album_covers/20.png',
+     albumArtUrl: 'assets/images/album_covers/02.png',
      songs: [
          { title: 'Hello, Operator?', duration: '1:01' },
          { title: 'Ring, ring, ring', duration: '5:01' },
@@ -27,6 +27,37 @@ var albumPicasso = {
          { title: 'Wrong phone number', duration: '2:15'}
      ]
  };
+
+var albumVanGogh = {
+    title: 'The Octopus',
+    artist: 'Vincent Van Gogh',
+    label: 'Other',
+    year: '1879',
+    albumArtUrl: 'assets/images/album_covers/03.png',
+    songs: [
+        {title: 'Crabs', duration: '2:02'},
+        {title: 'Sea Urchins', duration: 3:24},
+        {title: 'Narwhals', duration: 14:33},
+        {title: 'Orcas', duration: 4:01},
+        {title: 'Squids', duration: 0:56}
+    ]
+};
+
+var albums = [albumPicasso, albumMarconi, albumVanGogh];
+
+var listener = function(albums) {
+  for (var i = 0; i < albums.length; i++) {
+    albums[i].addEventListener("click", function(){
+      if (i < albums.length - 1) {
+      albums[i].albumArtUrl.nodeValue = albums[i + 1].albumArtUrl;
+      }
+      else {
+        albums[i].albumArtUrl.nodeValue = albums[0].albumArtUrl;
+      }
+    })
+  }
+};
+
 
  var createSongRow = function(songNumber, songName, songLength) {
      var template =
