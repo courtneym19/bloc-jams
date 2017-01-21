@@ -36,28 +36,12 @@ var albumVanGogh = {
     albumArtUrl: 'assets/images/album_covers/03.png',
     songs: [
         {title: 'Crabs', duration: '2:02'},
-        {title: 'Sea Urchins', duration: 3:24},
-        {title: 'Narwhals', duration: 14:33},
-        {title: 'Orcas', duration: 4:01},
-        {title: 'Squids', duration: 0:56}
+        {title: 'Sea Urchins', duration: '3:24'},
+        {title: 'Narwhals', duration: '14:33'},
+        {title: 'Orcas', duration: '4:01'},
+        {title: 'Squids', duration: '0:56'}
     ]
 };
-
-var albums = [albumPicasso, albumMarconi, albumVanGogh];
-
-var listener = function(albums) {
-  for (var i = 0; i < albums.length; i++) {
-    albums[i].addEventListener("click", function(){
-      if (i < albums.length - 1) {
-      albums[i].albumArtUrl.nodeValue = albums[i + 1].albumArtUrl;
-      }
-      else {
-        albums[i].albumArtUrl.nodeValue = albums[0].albumArtUrl;
-      }
-    })
-  }
-};
-
 
  var createSongRow = function(songNumber, songName, songLength) {
      var template =
@@ -71,12 +55,13 @@ var listener = function(albums) {
      return template;
  };
 
-var setCurrentAlbum = function(album) {
-     var albumTitle = document.getElementsByClassName('album-view-title')[0];
+  var albumTitle = document.getElementsByClassName('album-view-title')[0];
      var albumArtist = document.getElementsByClassName('album-view-artist')[0];
      var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
      var albumImage = document.getElementsByClassName('album-cover-art')[0];
      var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
+
+var setCurrentAlbum = function(album) {
      albumTitle.firstChild.nodeValue = album.title;
      albumArtist.firstChild.nodeValue = album.artist;
      albumReleaseInfo.firstChild.nodeValue = album.year + ' ' + album.label;
@@ -91,4 +76,13 @@ var setCurrentAlbum = function(album) {
      setCurrentAlbum(albumPicasso);
  };
  
+var albums = [albumPicasso, albumMarconi, albumVanGogh];
+var index = 0;
+albumImage.addEventListener("click", function(){
+  setCurrentAlbum(albums[index]);
+  index++;
+      if(index == albums.length) {
+    index = 0;
+  }
+});
  
