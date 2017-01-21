@@ -18,7 +18,7 @@ var albumPicasso = {
      artist: 'Guglielmo Marconi',
      label: 'EM',
      year: '1909',
-     albumArtUrl: 'assets/images/album_covers/20.png',
+     albumArtUrl: 'assets/images/album_covers/02.png',
      songs: [
          { title: 'Hello, Operator?', duration: '1:01' },
          { title: 'Ring, ring, ring', duration: '5:01' },
@@ -28,10 +28,25 @@ var albumPicasso = {
      ]
  };
 
+var albumVanGogh = {
+    title: 'The Octopus',
+    artist: 'Vincent Van Gogh',
+    label: 'Other',
+    year: '1879',
+    albumArtUrl: 'assets/images/album_covers/03.png',
+    songs: [
+        {title: 'Crabs', duration: '2:02'},
+        {title: 'Sea Urchins', duration: '3:24'},
+        {title: 'Narwhals', duration: '14:33'},
+        {title: 'Orcas', duration: '4:01'},
+        {title: 'Squids', duration: '0:56'}
+    ]
+};
+
  var createSongRow = function(songNumber, songName, songLength) {
      var template =
         '<tr class="album-view-song-item">'
-      + '  <td class="song-item-number">' + songNumber + '</td>'
+      + '  <td class="song-item-number" data-song-number="' + songNumber + '">' + songNumber + '</td>'
       + '  <td class="song-item-title">' + songName + '</td>'
       + '  <td class="song-item-duration">' + songLength + '</td>'
       + '</tr>'
@@ -55,9 +70,24 @@ var setCurrentAlbum = function(album) {
          albumSongList.innerHTML += createSongRow(i + 1, album.songs[i].title, album.songs[i].duration);
      }
  };
- 
+
+var songListContainer = document.getElementsByClassName('album-view-song-list')[0];
+var songRows = document.getElementsByClassName('album-view-song-item');
+
+var playButtonTemplate = '<a class="album-song-button"><span class="ion-play"></span></a>';
+
  window.onload = function() {
      setCurrentAlbum(albumPicasso);
  };
- 
+
+ songListContainer.addEventListener('mouseover', function(event) {
+         if (event.target.parentElement.className === 'album-view-song-item') {
+              event.target.parentElement.querySelector('.song-item-number').innerHTML = playButtonTemplate;
+         }
+     });
+for (var i = 0; i < songRows.length; i++) {
+         songRows[i].addEventListener('mouseleave', function(event) {
+              this.children[0].innerHTML = this.children[0].getAttribute('data-song-number');
+         });
+     }
  

@@ -7,10 +7,15 @@ var pointsArray = document.getElementsByClassName('point');
         point.style.WebkitTransform = "scaleX(1) translateY(0)";
     };
 
+ var forEach = function(array, callback) {
+    for (var i = 0; i < array.length; i++) {
+        callback(array[i]);
+    }
+}
  var animatePoints = function(points) {
      forEach(points, revealPoint);
      }
- };
+
     window.onload = function() {
          if (window.innerHeight > 950) {
          animatePoints(pointsArray);
