@@ -71,8 +71,7 @@ var setCurrentAlbum = function(album) {
      }
  };
 
-<<<<<<< HEAD
-=======
+
 var findParentByClassName = function(element, targetClass) {
     if (element) {
         var currentParent = element.parentElement;
@@ -118,7 +117,7 @@ var clickHandler = function(targetElement) {
          currentlyPlayingSong = songItem.getAttribute('data-song-number');
      }
  };
->>>>>>> cp-13
+
 
 var songListContainer = document.getElementsByClassName('album-view-song-list')[0];
 var songRows = document.getElementsByClassName('album-view-song-item');
@@ -153,9 +152,5 @@ for (var i = 0; i < songRows.length; i++) {
          });
      }
  }
-<<<<<<< HEAD
- 
-=======
 
->>>>>>> cp-13
      
