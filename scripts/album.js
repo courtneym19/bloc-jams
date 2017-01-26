@@ -150,5 +150,7 @@ for (var i = 0; i < songRows.length; i++) {
          });
      }
  }
+ 
+ console.log(songRows[0]);
 
      
