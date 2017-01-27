@@ -82,20 +82,21 @@ var findParentByClassName = function(element, targetClass) {
 };
 
 var getSongItem = function(element) {
+    console.log(element);
   switch(element.className) {
-    case 'album-view-song-item':
-      return element.querySelector('song-item-number');
-    case 'song-item-duration':
-    case 'song-item-title':
-      return findParentByClassName(element, 'album-view-song-item').querySelector('song-item-number');
     case 'album-song-button':
     case 'ion-play':
     case 'ion-pause':
       return findParentByClassName(element, 'song-item-number');
+    case 'album-view-song-item':
+      return element.querySelector('.song-item-number');
+    case 'song-item-title':
+    case 'song-item-duration':
+      return findParentByClassName(element, 'album-view-song-item').querySelector('.song-item-number');
     case 'song-item-number':
       return element;
     default:
-    return;
+        return;
   }
 };
 
@@ -149,5 +150,6 @@ for (var i = 0; i < songRows.length; i++) {
     songRows[i].addEventListener('click', function(event) {
              clickHandler(event.target);
     });
+ }
  }
  
