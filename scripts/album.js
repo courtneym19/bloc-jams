@@ -73,7 +73,7 @@ var setCurrentAlbum = function(album) {
 
 
 var findParentByClassName = function(element, targetClass) {
-    console.log(element);
+    console.log(currentParent);
     if (element.parentElement) {
         var currentParent = element.parentElement;
         while (currentParent.className != targetClass && currentParent.className !== null) {
@@ -89,8 +89,7 @@ var findParentByClassName = function(element, targetClass) {
         console.log("No parent found");
     }
 };
-console.log(findParentByClassName(h2, "album-view-details column half"));
-    
+findParentByClassName();
     
 var getSongItem = function(element) {
   switch(element.className) {
