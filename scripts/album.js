@@ -79,17 +79,18 @@ var findParentByClassName = function(element, targetClass) {
         while (currentParent.className != targetClass && currentParent.className !== null) {
             currentParent = currentParent.parentElement;
         }
-        if (currentParent.className != targetClass && currentParent.className == null) {
+    }
+    else if (currentParent.className != targetClass && currentParent.className == null) {
           currentParent = null;
           console.log("No parent found with that class name");
-        }
-        return currentParent;
     }
-    else if (!element.parentElement) {
+    else {
+        currentParent = null;
         console.log("No parent found");
     }
+    return currentParent;
 };
-findParentByClassName();
+console.log(document.getElementsByClassName('data-song-number'));
     
 var getSongItem = function(element) {
   switch(element.className) {
