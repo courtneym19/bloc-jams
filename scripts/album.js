@@ -52,7 +52,16 @@ var albumVanGogh = {
       + '</tr>'
       ;
  
-     return $(template);
+     var $row = $(template);
+     var onHover = function(event) {
+         // Placeholder for function logic
+     };
+     var offHover = function(event) {
+         // Placeholder for function logic
+     };
+     $row.find('.song-item-number').click(clickHandler);
+     $row.hover(onHover, offHover);
+     return $row;
  };
 
 var setCurrentAlbum = function(album) {
