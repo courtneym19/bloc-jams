@@ -90,7 +90,9 @@ var findParentByClassName = function(element, targetClass) {
     }
     return currentParent;
 };
-console.log(document.getElementsByClassName('data-song-number'));
+
+findParentByClassName('song-item-number'[0], 'album-view-song-list');
+console.log(document.getElementsByClassName('song-item-number')[0]);
     
 var getSongItem = function(element) {
   switch(element.className) {
