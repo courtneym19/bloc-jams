@@ -17,8 +17,7 @@
              }
              if (currentlyPlayingSongNumber !== songNumber) {
                  $(this).html(pauseButtonTemplate);
-                 currentlyPlayingSongNumber = songNumber;
-                 currentSongFromAlbum = currentAlbum.songs[songNumber - 1];
+                 setSong(songNumber);
                  updatePlayerBarSong();
              }
              else if (currentlyPlayingSongNumber === songNumber) {
@@ -131,6 +130,12 @@ var previousSong = function() {
     $nextSongNumberCell.html(pauseButtonTemplate);
     $lastSongNumberCell.html(lastSongNumber);
 };
+
+var setSong = function(songNumber) {
+    currentlyPlayingSong = parseInt(songNumber);
+    currentSongFromAlbum = currentAlbum.songs[songNumber - 1];
+};
+
 
 
 var playButtonTemplate = '<a class="album-song-button"><span class="ion-play"></span></a>';
