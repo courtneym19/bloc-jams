@@ -53,13 +53,14 @@ var albumVanGogh = {
       ;
  
      var $row = $(template);
+     
      var clickHandler = function() {
          var songNumber = $(this).attr('data-song-number');
-             if (currentlyPlayingSong === null) {
-                 songItemRow.html(pauseButtonTemplate);
-                 currentlyPlayingSong = songNumber;
+             if (currentlyPlayingSong !== null) {
+                 var currentlyPlayingCell = $('.song-item-number[data-song-number="' + currentlyPlayingSong + '"]');
+                 currentlyPlayingCell.html(currentlyPlayingSong);
              }
-             else if (currentlyPlayingSong !== songNumber) {
+             if (currentlyPlayingSong !== songNumber) {
                  $(this).html(pauseButtonTemplate);
                  currentlyPlayingSong = songNumber;
              }
