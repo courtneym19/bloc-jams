@@ -82,17 +82,17 @@ var updatePlayerBarSong = function() {
 var changeSong = function() {
     var currentSongIndex = trackIndex(currentAlbum, currentSongFromAlbum);
     var getLastSongNumber = function(index) {
-        if ($(this) == $('.next')) {
+        if ($(this) === $nextButton) {
             return index === 0 ? currentAlbum.songs.length : index;
             currentSongIndex++;
             if (currentSongIndex >= currentAlbum.songs.length) {
                 currentSongIndex = 0;
             }
         }
-        else if ($(this) == $('.previous')) {
-            return index == (currentAlbum.songs.length - 1) ? 1 : index + 2;
+        else if ($(this) === $previousButton) {
+            return index === (currentAlbum.songs.length - 1) ? 1 : index + 2;
             currentSongIndex--;
-            if (currentSongIndex === 0) {
+            if (currentSongIndex < 0) {
                 currentSongIndex = currentAlbum.songs.length - 1;
             }
         }
