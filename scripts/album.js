@@ -115,7 +115,7 @@ var previousSong = function() {
     var currentSongIndex = trackIndex(currentAlbum, currentSongFromAlbum);
     currentSongIndex--;
     
-    if (currentSongIndex == 0) {
+    if (currentSongIndex < 0) {
         currentSongIndex = currentAlbum.songs.length - 1;
     }
     setSong(currentSongIndex + 1);
