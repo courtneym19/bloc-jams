@@ -110,7 +110,6 @@ var changeSong = function() {
   $nextSongNumberCell.html(pauseButtonTemplate);
   $lastSongNumberCell.html(lastSongNumber);
 };
-
   
 
 var setSong = function(songNumber) {
