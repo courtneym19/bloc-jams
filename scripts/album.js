@@ -81,7 +81,16 @@ var updatePlayerBarSong = function() {
 
 var changeSong = function() {
   var currentSongIndex = trackIndex(currentAlbum, currentSongFromAlbum);
-  if ($(this) === $nextButton) {
+  var nextClicked = false;
+  $nextButton.click(function() {
+        nextClicked = true;
+  });
+  var prevClicked = false;
+  $previousButton.click(function() {
+       prevClicked = true; 
+  });
+  
+  if (nextClicked) {
     var getLastSongNumber = function(index) {
         return index === 0 ? currentAlbum.songs.length : index;
     };
@@ -90,7 +99,8 @@ var changeSong = function() {
         currentSongIndex = 0;
     }
   }
-  if ($(this) === $previousButton) {
+
+  if (prevClicked) {
     var getLastSongNumber = function(index) {
         return index == (currentAlbum.songs.length - 1) ? 1 : index + 2;
     };
@@ -99,6 +109,7 @@ var changeSong = function() {
         currentSongIndex = currentAlbum.songs.length - 1;
     }
   }
+    
   setSong(currentSongIndex + 1);
   
   updatePlayerBarSong();
