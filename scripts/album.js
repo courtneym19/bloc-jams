@@ -16,16 +16,26 @@
                  currentlyPlayingCell.html(currentlyPlayingSongNumber);
              }
              if (currentlyPlayingSongNumber !== songNumber) {
-                 $(this).html(pauseButtonTemplate);
                  setSong(songNumber);
                  currentSoundFile.play();
+                 updateSeekBarWhileSongPlays();
+                 currentSongFromAlbum = currentAlbum.songs[songNumber - 1];
+                 
+                 var $volFill = $('.volume .fill');
+                 var $volThumb = $('.volume .thumb');
+                 $volFill.width(currentVolume + '%');
+                 $volThumb.css({left: currentVolume + '%'});
+                 
+                 $(this).html(pauseButtonTemplate);
                  updatePlayerBarSong();
+                 
              }
              else if (currentlyPlayingSongNumber === songNumber) {
                  if (currentSoundFile.isPaused()) {
                     $(this).html(pauseButtonTemplate);
                     $('.main-controls .play-pause').html(playerBarPauseButton);
                     currentSoundFile.play();
+                    updateSeekBarWhileSongPlays();
                   }
                 else {
                     $(this).html(playButtonTemplate);
@@ -49,7 +59,6 @@
         if (songNumber !== currentlyPlayingSongNumber) {
             songItemRow.html(songNumber);
         };
-         console.log("songNumber type is " + typeof songNumber + "\n and currentlyPlayingSongNumber type is " + typeof currentlyPlayingSongNumber);
      };
 
      $row.find('.song-item-number').click(clickHandler);
@@ -77,9 +86,7 @@ var setCurrentAlbum = function(album) {
 
  var updateSeekBarWhileSongPlays = function() {
      if (currentSoundFile) {
-         // #10
          currentSoundFile.bind('timeupdate', function(event) {
-             // #11
              var seekBarFillRatio = this.getTime() / this.getDuration();
              var $seekBar = $('.seek-control .seek-bar');
  
@@ -101,19 +108,37 @@ var setupSeekBars = function() {
      var $seekBars = $('.player-bar .seek-bar');
  
      $seekBars.click(function(event) {
+    
          var offsetX = event.pageX - $(this).offset().left;
          var barWidth = $(this).width();
          var seekBarFillRatio = offsetX / barWidth;
+        
+         if ($(this).parent().attr('class') == 'seek-control') {
+             seek(seekBarFillRatio * currentSoundFile.getDuration());
+         }
+         else {
+             setVolume(seekBarFillRatio * 100);
+         }
+         
          updateSeekPercentage($(this), seekBarFillRatio);
      });
     
      $seekBars.find('.thumb').mousedown(function(event) {
+         
          var $seekBar = $(this).parent();
+         
          $(document).bind('mousemove.thumb', function(event){
              var offsetX = event.pageX - $seekBar.offset().left;
              var barWidth = $seekBar.width();
              var seekBarFillRatio = offsetX / barWidth;
- 
+             
+              if ($(this).parent().attr('class') == 'seek-control') {
+                seek(seekBarFillRatio * currentSoundFile.getDuration());
+              }
+              else {
+                setVolume(seekBarFillRatio * 100);
+              }
+        
              updateSeekPercentage($seekBar, seekBarFillRatio);
          });
          $(document).bind('mouseup.thumb', function() {
@@ -146,6 +171,7 @@ var nextSong = function() {
     }
     setSong(currentSongIndex + 1);
     currentSoundFile.play();
+    updateSeekBarWhileSongPlays();
     updatePlayerBarSong();
     
     var lastSongNumber = getLastSongNumber(currentSongIndex);
@@ -168,6 +194,7 @@ var previousSong = function() {
     }
     setSong(currentSongIndex + 1);
     currentSoundFile.play();
+    updateSeekBarWhileSongPlays();
     updatePlayerBarSong();
     
     var lastSongNumber = getLastSongNumber(currentSongIndex);
@@ -191,6 +218,13 @@ var setSong = function(songNumber) {
     setVolume(currentVolume);
 };
 
+
+ var seek = function(time) {
+     if (currentSoundFile) {
+         currentSoundFile.setTime(time);
+     }
+ };
+ 
  var setVolume = function(volume) {
      if (currentSoundFile) {
          currentSoundFile.setVolume(volume);
