@@ -79,6 +79,7 @@ var updatePlayerBarSong = function() {
 
 
 
+
 var changeSong = function() {
   var currentSongIndex = trackIndex(currentAlbum, currentSongFromAlbum);
   var nextClicked = false;
@@ -121,7 +122,6 @@ var changeSong = function() {
   $nextSongNumberCell.html(pauseButtonTemplate);
   $lastSongNumberCell.html(lastSongNumber);
 };
-  
 
 var setSong = function(songNumber) {
     currentlyPlayingSongNumber = parseInt(songNumber);
