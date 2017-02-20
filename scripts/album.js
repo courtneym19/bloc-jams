@@ -239,7 +239,7 @@ var getSongNumberCell = function(number) {
 
 };
 
-<<<<<<< HEAD
+
 var togglePlayFromPlayerBar = function() {
   var currentCell = getSongNumberCell(currentlyPlayingSongNumber);
     if (currentSoundFile) {
@@ -254,7 +254,8 @@ var togglePlayFromPlayerBar = function() {
             currentSoundFile.pause();
         }
     }
-=======
+};
+
 var setCurrentTimeInPlayerBar = function(currentTime) {
   $('.current-time').text(filterTimeCode(currentTime));
 };
@@ -271,7 +272,7 @@ var filterTimeCode = function(timeInSeconds) {
     remainingSeconds = "0" + remainingSeconds;
   }
   return (minutes + ":" + remainingSeconds);
->>>>>>> asst-21
+
 };
 
 
@@ -296,8 +297,6 @@ var $playerBarPause = $('.main-controls .play-pause');
      setupSeekBars();
      $previousButton.click(previousSong);
      $nextButton.click(nextSong);
-     $playerBarPause.click(function() {
-         togglePlayFromPlayerBar();
-     });
+     $playerBarPause.click(togglePlayFromPlayerBar);
  });
  
